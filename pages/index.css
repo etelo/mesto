@@ -17,25 +17,42 @@
 @import url("../blocks/profile/__edit-button/profile__edit-button.css");
 @import url("../blocks/profile/__add-button/profile__add-button.css");
 
-/* .profile__block {
-  border: dashed rgb(0, 255, 242);
-}
-.profile__info {
-  border: dashed rgb(72, 255, 0);
-}
-.profile {
-  border: dashed rgb(255, 0, 76);
-}
-.profile__avatar {
-  border: solid rgb(255, 208, 0);
-}
-.profile__cover {
-  border: solid rgb(0, 217, 255);
-}
-.profile__title {
-  border: dashed rgb(0, 217, 255);
-}
-.page__cover {
-  border: solid rgb(0, 217, 255);
+@import url("../blocks/elements/elements.css");
+@import url("../blocks/elements/__list/elements__list.css");
+@import url("../blocks/element/element.css");
+@import url("../blocks/element/__image/element__image.css");
+@import url("../blocks/element/__description/element__description.css");
+@import url("../blocks/element/__like/element__like.css");
+@import url("../blocks/element/__title/element__title.css");
+
+@import url("../blocks/footer/footer.css");
+@import url("../blocks/footer/__copyright/footer__copyright.css");
+
+
+/* @media screen and (max-width: 670px){
+  . {
+  }
 } */
 
+.content {
+  /* border: 1px dashed rgb(72, 255, 0); */
+}
+
+.elements {
+  /* border: 1px dashed rgb(72, 255, 0); */
+}
+
+.element {
+  /* border: 1px dashed rgb(0, 195, 255); */
+}
+.elements__list {
+  /* border: 1px dashed rgb(255, 217, 0); */
+} 
+
+.elements__list {
+  /* border: 111px dashed rgb(255, 217, 0); */
+} 
+
+.footer { 
+  /* border: 1px dashed rgb(72, 255, 0); */
+}
