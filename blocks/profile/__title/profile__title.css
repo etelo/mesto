@@ -10,14 +10,15 @@
   white-space: nowrap;
   overflow: hidden;
   min-width: 189px;
+  max-width: 294px;
 }
 
 @media screen and (max-width: 670px) {
   .profile__title {
-    /* position:static; */
     font-size: 27px;
     line-height: 33px;
     text-align: center;
     margin-top: 26px;
+    max-width: 190px;
   }
 }
