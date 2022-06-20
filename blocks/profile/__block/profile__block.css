@@ -1,16 +1,14 @@
 .profile__block {
   display: flex;
   justify-content: center;
-  
   align-items: baseline;
-  /* max-width: 500px; */
-  
-  /* min-width: 336px; */
 }
 
 @media screen and (max-width: 670px){
   .profile__block {
-    /* width: 100%; */
-    transform: translateX(10px);
+    display: grid;
+    grid-template-areas:
+    ". title button";
+    grid-template-columns: minmax(28px, auto);
   }
 }

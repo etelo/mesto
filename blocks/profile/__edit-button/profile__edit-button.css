@@ -1,15 +1,21 @@
 .profile__edit-button {
+  grid-area: button;
   width: 24px;
   height: 24px;
-  /* margin-top: auto; */
-  /* display: flex; */
   background-image: url(../../../images/button-stick.svg);
   background-position: 50%;
   background-size: 10px;
   background-repeat: no-repeat;
-  background-color: #000000;
+  background-color: rgba(0, 0, 0, 0);
   border: 1px solid #ffffff;
   margin-left: 25px;
+  cursor: pointer;
+  transition: 0.1s ease;
+  box-sizing: border-box;
+}
+
+.profile__edit-button:hover {
+  opacity: 0.6;
 }
 
 @media screen and (max-width: 670px) {

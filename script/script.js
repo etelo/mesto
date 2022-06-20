@@ -1,7 +1,7 @@
 let popup = document.querySelector(".popup");
 
-let nameInput = document.querySelector(".popup__input-name");
-let jobInput = document.querySelector(".popup__input-job");
+let nameInput = document.querySelector('[name="nameInput"]');
+let jobInput = document.querySelector('[name="jobInput"]');
 
 let profileTitle = document.querySelector(".profile__title");
 let profileSubtitle = document.querySelector(".profile__subtitle");
