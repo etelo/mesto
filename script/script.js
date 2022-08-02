@@ -151,11 +151,10 @@ function createInitiallyCards() {
 function addEventListenerPopupAdd() {
   popupAddForm.addEventListener("submit", function (evt) {
     evt.preventDefault();
-    const formInput = 
-      {
-        name: popupAddInputPlace.value,
-        link: popupAddInputPicture.value,
-      };
+    const formInput = {
+      name: popupAddInputPlace.value,
+      link: popupAddInputPicture.value,
+    };
     renderTodo(formInput, list);
     popupAddInputPlace.value = "";
     popupAddInputPicture.value = "";
@@ -175,4 +174,3 @@ popupImageClosed.addEventListener("click", function () {
 
 createInitiallyCards();
 addEventListenerPopupAdd();
-
