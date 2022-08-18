@@ -174,3 +174,20 @@ popupImageClosed.addEventListener("click", function () {
 
 createInitiallyCards();
 addEventListenerPopupAdd();
+
+const popupOverley = Array.from(document.querySelectorAll(".popup"));
+popupOverley.forEach((popup) => {
+  popup.addEventListener('mousedown', (evt) => {
+    if (evt.target.classList.contains('popup_opened')) {
+      evt.target.classList.remove("popup_opened")
+    }
+  })
+})
+
+document.addEventListener('keydown', (evt) => {
+  const popup_opened = document.querySelector(".popup_opened");
+  if(popup_opened !== null && evt.key === "Escape")
+  {
+    popup_opened.classList.remove("popup_opened");
+  }
+})

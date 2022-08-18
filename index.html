@@ -36,7 +36,7 @@
       </footer>
     </div>
 
-    <div class="popup popup_type_edit-title">
+    <div class="popup popup_type_edit-title">  
       <div class="popup__container">
         <button type="button" class="popup__closed"></button>
         <p class="popup__title">Редактировать профиль</p>
@@ -45,20 +45,24 @@
             type="text"
             class="popup__input popup__input-name"
             value="Вася1"
-            maxlength="30"
-            minlength="3"
+            maxlength="40"
+            minlength="2"
             name="nameInput"
+            id="name-input"
             required
           />
+          <span class="popup__form-error name-input-error"></span>
           <input
             type="text"
             class="popup__input popup__input-job"
             value="Вася2"
-            maxlength="30"
-            minlength="3"
+            maxlength="200"
+            minlength="2"
             name="jobInput"
+            id="job-input"
             required
           />
+          <span class="popup__form-error job-input-error"></span>
           <button type="submit" class="popup__button-submit">Сохранить</button>
         </form>
       </div>
@@ -72,22 +76,27 @@
           <input
             type="text"
             class="popup__input popup__input-place"
-            value="вася"
+            value=""
             placeholder="Название"
             maxlength="30"
             minlength="3"
             name="placeInput"
+            id="name-input"
             required
           />
+          <!-- https://static-cse.canva.com/blob/847064/29.0368567e.avif -->
+          <span class="popup__form-error name-input-error"></span>
           <input
-            type="text"
+            type="url"
             class="popup__input popup__input-picture"
-            value="https://static-cse.canva.com/blob/847064/29.0368567e.avif"
+            value="" 
             placeholder="Ссылка на картинку"
             minlength="3"
             name="pictureInput"
+            id="place-input"
             required
           />
+          <span class="popup__form-error place-input-error"></span>
           <button type="submit" class="popup__button-submit">Добавить</button>
         </form>
       </div>
@@ -102,6 +111,7 @@
     </div>
 
     <script src="./script/script.js" defer></script>
+    <script src="./script/validate.js" defer></script>
 
     <template class="template">
       <li class="element">
