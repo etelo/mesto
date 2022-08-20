@@ -34,21 +34,22 @@ const selectors = {
   list: ".elements__list",
   template: ".template",
 
+  element: ".element",
   elementTitle: ".element__title",
   elementImage: ".element__image",
   elementDelete: ".element__delete",
   elementLike: ".element__like",
   elementLikeActive: "element__like_active",
 
-  popupEdit: ".popup_type_edit-title",
+  popupEdit: ".popup_type_edit_profile",
   popupEditForm: ".popup__form",
-  popupEditClosed: ".popup__closed",
+  buttonClose: ".popup__close-btn",
   popupEditInputName: ".popup__input-name",
   popupEditInputJob: ".popup__input-job",
 
   popupAdd: ".popup_type_add-card",
   popupAddForm: ".popup__form_add-card",
-  popupAddClosed: ".popup__closed",
+  popupAddClosed: ".popup__close-btn",
   popupAddSubmit: ".popup__button-submit",
   popupAddInputPlace: ".popup__input-place",
   popupAddInputPicture: ".popup__input-picture",
@@ -65,11 +66,11 @@ const profileEdit = document.querySelector(selectors.profileEdit);
 const profileAdd = document.querySelector(selectors.profileAdd);
 
 const list = document.querySelector(selectors.list);
-const template = document.querySelector(selectors.template).content.children[0];
+const template = document.querySelector(selectors.template).content.querySelector(selectors.element);
 
 const popupEdit = document.querySelector(selectors.popupEdit);
 const popupEditForm = popupEdit.querySelector(selectors.popupEditForm);
-const popupEditClosed = popupEdit.querySelector(selectors.popupEditClosed);
+const buttonClose = popupEdit.querySelector(selectors.buttonClose);
 const popupEditInputName = popupEdit.querySelector(selectors.popupEditInputName);
 const popupEditInputJob = popupEdit.querySelector(selectors.popupEditInputJob);
 
@@ -103,7 +104,7 @@ profileEdit.addEventListener("click", function () {
   popupEditInputName.value = profileTitle.textContent;
   popupEditInputJob.value = profileSubtitle.textContent;
 });
-popupEditClosed.addEventListener("click", function () {
+buttonClose.addEventListener("click", function () {
   closedPopup(popupEdit);
 });
 popupEditForm.addEventListener("submit", editProfile);
@@ -145,7 +146,6 @@ function renderTodo(data, container) {
   container.prepend(elm);
 }
 function createInitiallyCards() {
-  // popups.forEach(createTodo);
   places.forEach((item) => renderTodo(item, list));
 }
 function addEventListenerPopupAdd() {

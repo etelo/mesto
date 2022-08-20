@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="./pages/index.css" />
+    <script src="./script/validate.js" defer></script>
     <title>Mesto russia</title>
   </head>
 
@@ -36,18 +37,17 @@
       </footer>
     </div>
 
-    <div class="popup popup_type_edit-title">  
+    <div class="popup popup_type_edit_profile">
       <div class="popup__container">
-        <button type="button" class="popup__closed"></button>
+        <button type="button" class="popup__close-btn"></button>
         <p class="popup__title">Редактировать профиль</p>
-        <form action="#" class="popup__form">
+        <form class="popup__form">
           <input
             type="text"
             class="popup__input popup__input-name"
-            value="Вася1"
             maxlength="40"
             minlength="2"
-            name="nameInput"
+            name="name-Input"
             id="name-input"
             required
           />
@@ -55,10 +55,9 @@
           <input
             type="text"
             class="popup__input popup__input-job"
-            value="Вася2"
             maxlength="200"
             minlength="2"
-            name="jobInput"
+            name="job-Input"
             id="job-input"
             required
           />
@@ -70,17 +69,16 @@
 
     <div class="popup popup_type_add-card">
       <div class="popup__container">
-        <button type="button" class="popup__closed"></button>
+        <button aria-label="Closed" type="button" class="popup__close-btn"></button>
         <p class="popup__title">Новое место</p>
         <form class="popup__form popup__form_add-card">
           <input
             type="text"
             class="popup__input popup__input-place"
-            value=""
             placeholder="Название"
             maxlength="30"
-            minlength="3"
-            name="placeInput"
+            minlength="2"
+            name="place-Input"
             id="place-input"
             required
           />
@@ -89,10 +87,9 @@
           <input
             type="url"
             class="popup__input popup__input-picture"
-            value="" 
             placeholder="Ссылка на картинку"
             minlength="3"
-            name="pictureInput"
+            name="picture-Input"
             id="picture-input"
             required
           />
@@ -104,22 +101,25 @@
 
     <div class="popup popup_type_image">
       <div class="popup__image-container">
-        <button type="button" class="popup__closed popup__image-closed"></button>
+        <button
+          aria-label="Closed"
+          type="button"
+          class="popup__close-btn popup__image-closed"
+        ></button>
         <img alt="" class="popup__image-img" />
         <h2 class="popup__image-txt">dvvdv</h2>
       </div>
     </div>
 
     <script src="./script/script.js" defer></script>
-    <script src="./script/validate.js" defer></script>
 
     <template class="template">
       <li class="element">
-        <button type="button" class="element__delete"></button>
+        <button aria-label="button" type="button" class="element__delete"></button>
         <img alt="" class="element__image" />
         <div class="element__description">
           <p class="element__title"></p>
-          <button type="button" class="element__like"></button>
+          <button aria-label="Like" type="button" class="element__like"></button>
         </div>
       </li>
     </template>
