@@ -72,7 +72,9 @@ const profileEdit = document.querySelector(selectors.profileEdit);
 const profileAdd = document.querySelector(selectors.profileAdd);
 
 const list = document.querySelector(selectors.list);
-const template = document.querySelector(selectors.template).content.querySelector(selectors.element);
+const template = document
+  .querySelector(selectors.template)
+  .content.querySelector(selectors.element);
 
 const popupEdit = document.querySelector(selectors.popupEdit);
 const popupEditForm = popupEdit.querySelector(selectors.popupEditForm);
@@ -96,17 +98,17 @@ const listenerKeyEscape = function (evt) {
   if (evt.key === "Escape") {
     const popupOpened = document.querySelector(selectors.popupOpenedclass);
     closePopup(popupOpened);
-    document.removeEventListener('keydown', listenerKeyEscape);
+    document.removeEventListener("keydown", listenerKeyEscape);
   }
 };
 
 function openPopup(namePopup) {
   namePopup.classList.add(selectors.popupOpened);
-  document.addEventListener('keydown', listenerKeyEscape);
+  document.addEventListener("keydown", listenerKeyEscape);
 }
 function closePopup(namePopup) {
   namePopup.classList.remove(selectors.popupOpened);
-  document.removeEventListener('keydown', listenerKeyEscape);
+  document.removeEventListener("keydown", listenerKeyEscape);
 }
 function editProfile(evt) {
   evt.preventDefault();
@@ -161,7 +163,7 @@ function createInitialCards() {
 }
 function addSubmitEventListeners() {
   popupAddForm.addEventListener("submit", function (evt) {
-    // evt.preventDefault();
+    // evt.preventDefault();hghh
     const formInput = {
       name: popupAddInputPlace.value,
       link: popupAddInputPicture.value,
@@ -171,7 +173,6 @@ function addSubmitEventListeners() {
     popupAddInputPicture.value = "";
 
     closePopup(popupAdd);
-
   });
   popupEditForm.addEventListener("submit", editProfile);
 }
@@ -185,11 +186,13 @@ addSubmitEventListeners();
 
 const popups = document.querySelectorAll(selectors.popup);
 popups.forEach((popup) => {
-  popup.addEventListener('mousedown', (evt) => {
-    if ((evt.target.classList.contains(selectors.popupOpened) ||
-     evt.target.classList.contains(selectors.popupButtonClose)) && evt.button === 0) {
+  popup.addEventListener("mousedown", (evt) => {
+    if (
+      (evt.target.classList.contains(selectors.popupOpened) ||
+        evt.target.classList.contains(selectors.popupButtonClose)) &&
+      evt.button === 0
+    ) {
       closePopup(popup);
     }
-  })
-})
-
+  });
+});
