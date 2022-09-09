@@ -5,7 +5,6 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" href="./pages/index.css" />
-  <script src="./script/validate.js" defer></script>
   <title>Mesto russia</title>
 </head>
 
@@ -42,7 +41,7 @@
     <div class="popup__container">
       <button type="button" class="popup__close-btn"></button>
       <p class="popup__title">Редактировать профиль</p>
-      <form class="popup__form">
+      <form class="popup__form popup__form_edit-profile">
         <input type="text" class="popup__input popup__input-name" maxlength="40" minlength="2" name="name-Input"
           id="name-input" required />
         <span class="popup__form-error name-input-error"></span>
@@ -78,7 +77,8 @@
     </div>
   </div>
 
-  <script src="./script/script.js" defer></script>
+  <script type="module" src="./scripts/index.js"></script>
+  <!-- <script type="module" src="./scripts/Card.js"></script> -->
 
   <template class="template">
     <li class="element">
