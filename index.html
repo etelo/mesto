@@ -41,7 +41,7 @@
     <div class="popup__container">
       <button type="button" class="popup__close-btn"></button>
       <p class="popup__title">Редактировать профиль</p>
-      <form class="popup__form popup__form_edit-profile">
+      <form class="popup__form popup__form_edit-profile" name="profile-form">
         <input type="text" class="popup__input popup__input-name" maxlength="40" minlength="2" name="name-Input"
           id="name-input" required />
         <span class="popup__form-error name-input-error"></span>
@@ -57,7 +57,7 @@
     <div class="popup__container">
       <button aria-label="закрыть" type="button" class="popup__close-btn"></button>
       <p class="popup__title">Новое место</p>
-      <form class="popup__form popup__form_add-card">
+      <form class="popup__form popup__form_add-card" name="card-form">
         <input type="text" class="popup__input popup__input-place" placeholder="Название" maxlength="30" minlength="2"
           name="place-Input" id="place-input" required />
         <span class="popup__form-error place-input-error"></span>

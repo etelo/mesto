@@ -43,7 +43,7 @@ const selectors = {
   elementDelete: ".element__delete",
   elementLike: ".element__like",
   elementLikeActive: "element__like_active",
-  
+
   popup: ".popup",
   popupOpened: "popup_opened",
   popupOpenedclass: ".popup_opened",
@@ -91,8 +91,12 @@ const template = document
 
 const popupEdit = document.querySelector(selectors.popupEdit);
 const popupEditForm = popupEdit.querySelector(selectors.popupEditForm);
-const popupEditButtonClose = popupEdit.querySelector(selectors.popupEditButtonClose);
-const popupEditInputName = popupEdit.querySelector(selectors.popupEditInputName);
+const popupEditButtonClose = popupEdit.querySelector(
+  selectors.popupEditButtonClose
+);
+const popupEditInputName = popupEdit.querySelector(
+  selectors.popupEditInputName
+);
 const popupEditInputJob = popupEdit.querySelector(selectors.popupEditInputJob);
 
 const popupAdd = document.querySelector(selectors.popupAdd);
@@ -100,31 +104,48 @@ const popupAddForm = popupAdd.querySelector(selectors.popupAddForm);
 const popupAddClosed = popupAdd.querySelector(selectors.popupAddClosed);
 const popupAddSubmit = popupAdd.querySelector(selectors.popupAddSubmit);
 const popupAddInputPlace = popupAdd.querySelector(selectors.popupAddInputPlace);
-const popupAddInputPicture = popupAdd.querySelector(selectors.popupAddInputPicture);
+const popupAddInputPicture = popupAdd.querySelector(
+  selectors.popupAddInputPicture
+);
 
 const popupImage = document.querySelector(selectors.popupImage);
 const popupImageClosed = popupImage.querySelector(selectors.popupImageClosed);
 const popupImageImg = popupImage.querySelector(selectors.popupImageImg);
 const popupImageTxt = popupImage.querySelector(selectors.popupImageTxt);
 
-const AddCardFormValidation = new FormValidator (selectorsForms, selectors.popupAddForm);
-AddCardFormValidation.enableValidation();
-const EditTitleFormValidation = new FormValidator (selectorsForms, selectors.popupEditProfileForm);
-EditTitleFormValidation.enableValidation();
+const formValidators = {};
 
-const handleClicImage = (name, link) => {
+// Включение валидации
+const enableValidation = (config) => {
+  const formList = Array.from(document.querySelectorAll(config.formSelector));
+  formList.forEach((formElement) => {
+    const validator = new FormValidator(config, formElement);
+    // получаем данные из атрибута `name` у формы
+    const formName = formElement.getAttribute("name");
+    // вот тут в объект записываем под именем формы
+    formValidators[formName] = validator;
+    validator.enableValidation();
+  });
+};
+
+enableValidation(selectorsForms);
+
+const handleClickImage = (name, link) => {
   popupImageImg.src = link;
   popupImageImg.alt = name;
   popupImageTxt.textContent = name;
   openPopup(popupImage);
 };
 
-
-function renderElement(data, container) {
-  const card = new Card(data, selectors, handleClicImage);
-  container.prepend(card.createElement());
+function createCard(item) {
+  const card = new Card(item, selectors, handleClickImage);
+  return card;
 }
 
+function renderElement(data, container) {
+  const card = createCard(data);
+  container.prepend(card.createElement());
+}
 
 function createInitialCards() {
   places.forEach((item) => renderElement(item, list));
@@ -145,21 +166,20 @@ popups.forEach((popup) => {
   });
 });
 
-const listenerKeyEscape = function (evt) {
+const handleEscapeKey = function (evt) {
   if (evt.key === "Escape") {
     const popupOpened = document.querySelector(selectors.popupOpenedclass);
     closePopup(popupOpened);
-    document.removeEventListener("keydown", listenerKeyEscape);
   }
 };
 
 function openPopup(namePopup) {
   namePopup.classList.add(selectors.popupOpened);
-  document.addEventListener("keydown", listenerKeyEscape);
+  document.addEventListener("keydown", handleEscapeKey);
 }
 function closePopup(namePopup) {
   namePopup.classList.remove(selectors.popupOpened);
-  document.removeEventListener("keydown", listenerKeyEscape);
+  document.removeEventListener("keydown", handleEscapeKey);
 }
 
 profileAdd.addEventListener("click", function () {
@@ -175,14 +195,12 @@ function editProfile(evt) {
 
 function addSubmitEventListeners() {
   popupAddForm.addEventListener("submit", function (evt) {
-    // evt.preventDefault();hghh
     const formInput = {
       name: popupAddInputPlace.value,
       link: popupAddInputPicture.value,
     };
     renderElement(formInput, list);
-    popupAddInputPlace.value = "";
-    popupAddInputPicture.value = "";
+    evt.target.reset();
 
     closePopup(popupAdd);
   });
@@ -191,13 +209,9 @@ function addSubmitEventListeners() {
 addSubmitEventListeners();
 
 profileEdit.addEventListener("click", function () {
+  const nameForm = popupEdit.querySelector(selectors.popupEditForm).name;
+  formValidators[nameForm].resetValidation();
   openPopup(popupEdit);
   popupEditInputName.value = profileTitle.textContent;
   popupEditInputJob.value = profileSubtitle.textContent;
 });
-
-// profileEdit.addEventListener("click", function () {
-//   openPopup(popupEdit);
-//   // popupEditInputName.value = profileTitle.textContent;
-//   // popupEditInputJob.value = profileSubtitle.textContent;
-// });

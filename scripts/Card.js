@@ -17,24 +17,26 @@ export default class Card {
     );
     this._elementLike = this._card.querySelector(this._selectors.elementLike);
 
-    // открыть картинку
-    this._elementImage.addEventListener("click", () =>
-      this._handleClicImage(this._data.name, this._data.link)
-    );
-
-    // удаление карточки
-    this._elementDelete.addEventListener("click", () =>
-      this._handleClickDeleteCard()
-    );
-
-    // поставить лайк
-    this._elementLike.addEventListener("click", () => this._handleClickLike());
+    this._setEventListeners();
 
     this._elementTitle.textContent = this._data.name;
     this._elementImage.alt = this._data.name;
     this._elementImage.src = this._data.link;
 
     return this._card;
+  }
+
+  _setEventListeners() {
+    // открыть картинку
+    this._elementImage.addEventListener("click", () =>
+      this._handleClicImage(this._data.name, this._data.link)
+    );
+    // удаление карточки
+    this._elementDelete.addEventListener("click", () =>
+      this._handleClickDeleteCard()
+    );
+    // поставить лайк
+    this._elementLike.addEventListener("click", () => this._handleClickLike());
   }
 
   _handleClickDeleteCard() {
