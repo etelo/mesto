@@ -215,3 +215,4 @@ profileEdit.addEventListener("click", function () {
   popupEditInputName.value = profileTitle.textContent;
   popupEditInputJob.value = profileSubtitle.textContent;
 });
+// 1
