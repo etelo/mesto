@@ -1,6 +1,6 @@
-import Card from "./Card.js";
-import FormValidator from "./FormValidator.js";
-import '../pages/index.css';
+import Card from "../components/Card.js";
+import FormValidator from "../components/FormValidator.js";
+import "../pages/index.css";
 
 const places = [
   {
@@ -115,7 +115,6 @@ const popupImageImg = popupImage.querySelector(selectors.popupImageImg);
 const popupImageTxt = popupImage.querySelector(selectors.popupImageTxt);
 
 const formValidators = {};
-
 // Включение валидации
 const enableValidation = (config) => {
   const formList = Array.from(document.querySelectorAll(config.formSelector));
@@ -128,7 +127,6 @@ const enableValidation = (config) => {
     validator.enableValidation();
   });
 };
-
 enableValidation(selectorsForms);
 
 const handleClickImage = (name, link) => {
