@@ -1,33 +1,7 @@
+import "./index.css";
 import Card from "../components/Card.js";
 import FormValidator from "../components/FormValidator.js";
-import "../pages/index.css";
-
-const places = [
-  {
-    name: "Архыз",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg",
-  },
-  {
-    name: "Челябинская область",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg",
-  },
-  {
-    name: "Иваново",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg",
-  },
-  {
-    name: "Камчатка",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg",
-  },
-  {
-    name: "Холмогорский район",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg",
-  },
-  {
-    name: "Байкал",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg",
-  },
-];
+import { initialCards } from "../utils/constants.js";
 
 const selectors = {
   profileTitle: ".profile__title",
@@ -92,12 +66,8 @@ const template = document
 
 const popupEdit = document.querySelector(selectors.popupEdit);
 const popupEditForm = popupEdit.querySelector(selectors.popupEditForm);
-const popupEditButtonClose = popupEdit.querySelector(
-  selectors.popupEditButtonClose
-);
-const popupEditInputName = popupEdit.querySelector(
-  selectors.popupEditInputName
-);
+const popupEditButtonClose = popupEdit.querySelector(selectors.popupEditButtonClose);
+const popupEditInputName = popupEdit.querySelector(selectors.popupEditInputName);
 const popupEditInputJob = popupEdit.querySelector(selectors.popupEditInputJob);
 
 const popupAdd = document.querySelector(selectors.popupAdd);
@@ -105,9 +75,7 @@ const popupAddForm = popupAdd.querySelector(selectors.popupAddForm);
 const popupAddClosed = popupAdd.querySelector(selectors.popupAddClosed);
 const popupAddSubmit = popupAdd.querySelector(selectors.popupAddSubmit);
 const popupAddInputPlace = popupAdd.querySelector(selectors.popupAddInputPlace);
-const popupAddInputPicture = popupAdd.querySelector(
-  selectors.popupAddInputPicture
-);
+const popupAddInputPicture = popupAdd.querySelector(selectors.popupAddInputPicture);
 
 const popupImage = document.querySelector(selectors.popupImage);
 const popupImageClosed = popupImage.querySelector(selectors.popupImageClosed);
