@@ -1,4 +1,3 @@
-// начальные карточки
 export const initialCards = [
   {
     name: "Архыз",
