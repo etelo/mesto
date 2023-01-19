@@ -1,185 +1,83 @@
 import "./index.css";
 import Card from "../components/Card.js";
+import Section from "../components/Section.js";
+import PopupWithImage from "../components/PopupWithImage.js";
+import PopupWithForm from "../components/PopupWithForm.js";
 import FormValidator from "../components/FormValidator.js";
-import { initialCards } from "../utils/constants.js";
+import UserInfo from "../components/UserInfo.js";
+import {
+  initialCards,
+  selectorsForms,
+  selectors,
+  profileTitle,
+  profileSubtitle,
+  profileEdit,
+  profileAdd,
+  list,
+  popupEdit,
+  popupEditForm,
+  popupEditInputName,
+  popupEditInputJob,
+  popupAdd,
+  popupAddForm,
+  popupImage,
+} from "../utils/constants.js";
 
-const selectors = {
-  profileTitle: ".profile__title",
-  profileSubtitle: ".profile__subtitle",
-  profileEdit: ".profile__edit-button",
-  profileAdd: ".profile__add-button",
+const validatorForAddCard = new FormValidator(selectorsForms, popupAddForm);
+const validatorForEdit = new FormValidator(selectorsForms, popupEditForm);
+validatorForAddCard.enableValidation();
+validatorForEdit.enableValidation();
 
-  list: ".elements__list",
-  template: ".template",
+const cards = new Section(
+  {
+    items: initialCards,
+    renderer: (item) => {
+      const cardItem = handleNewCard(item);
+      cards.addItem(cardItem);
+    },
+  },
+  list
+);
 
-  element: ".element",
-  elementTitle: ".element__title",
-  elementImage: ".element__image",
-  elementDelete: ".element__delete",
-  elementLike: ".element__like",
-  elementLikeActive: "element__like_active",
+const popupScaleImage = new PopupWithImage(popupImage);
 
-  popup: ".popup",
-  popupOpened: "popup_opened",
-  popupOpenedclass: ".popup_opened",
-
-  popupButtonClose: "popup__close-btn",
-
-  popupEdit: ".popup_type_edit-profile",
-  popupEditForm: ".popup__form",
-  popupEditProfileForm: ".popup__form_edit-profile",
-  popupEditButtonClose: ".popup__close-btn",
-  popupEditInputName: ".popup__input-name",
-  popupEditInputJob: ".popup__input-job",
-
-  popupAdd: ".popup_type_add-card",
-  popupAddForm: ".popup__form_add-card",
-  popupAddClosed: ".popup__close-btn",
-  popupAddSubmit: ".popup__button-submit",
-  popupAddInputPlace: ".popup__input-place",
-  popupAddInputPicture: ".popup__input-picture",
-
-  popupImage: ".popup_type_image",
-  popupImageClosed: ".popup__image-closed",
-  popupImageImg: ".popup__image-img",
-  popupImageTxt: ".popup__image-txt",
-};
-
-const selectorsForms = {
-  formSelector: ".popup__form",
-  inputSelector: ".popup__input",
-  submitButtonSelector: ".popup__button-submit",
-  inactiveButtonClass: "button_inactive",
-  inputError: "popup__input_type_error",
-  inputErrorActive: "popup__input-error_active",
-};
-
-const profileTitle = document.querySelector(selectors.profileTitle);
-const profileSubtitle = document.querySelector(selectors.profileSubtitle);
-const profileEdit = document.querySelector(selectors.profileEdit);
-const profileAdd = document.querySelector(selectors.profileAdd);
-
-const list = document.querySelector(selectors.list);
-const template = document
-  .querySelector(selectors.template)
-  .content.querySelector(selectors.element);
-
-const popupEdit = document.querySelector(selectors.popupEdit);
-const popupEditForm = popupEdit.querySelector(selectors.popupEditForm);
-const popupEditButtonClose = popupEdit.querySelector(selectors.popupEditButtonClose);
-const popupEditInputName = popupEdit.querySelector(selectors.popupEditInputName);
-const popupEditInputJob = popupEdit.querySelector(selectors.popupEditInputJob);
-
-const popupAdd = document.querySelector(selectors.popupAdd);
-const popupAddForm = popupAdd.querySelector(selectors.popupAddForm);
-const popupAddClosed = popupAdd.querySelector(selectors.popupAddClosed);
-const popupAddSubmit = popupAdd.querySelector(selectors.popupAddSubmit);
-const popupAddInputPlace = popupAdd.querySelector(selectors.popupAddInputPlace);
-const popupAddInputPicture = popupAdd.querySelector(selectors.popupAddInputPicture);
-
-const popupImage = document.querySelector(selectors.popupImage);
-const popupImageClosed = popupImage.querySelector(selectors.popupImageClosed);
-const popupImageImg = popupImage.querySelector(selectors.popupImageImg);
-const popupImageTxt = popupImage.querySelector(selectors.popupImageTxt);
-
-const formValidators = {};
-// Включение валидации
-const enableValidation = (config) => {
-  const formList = Array.from(document.querySelectorAll(config.formSelector));
-  formList.forEach((formElement) => {
-    const validator = new FormValidator(config, formElement);
-    // получаем данные из атрибута `name` у формы
-    const formName = formElement.getAttribute("name");
-    // вот тут в объект записываем под именем формы
-    formValidators[formName] = validator;
-    validator.enableValidation();
-  });
-};
-enableValidation(selectorsForms);
-
-const handleClickImage = (name, link) => {
-  popupImageImg.src = link;
-  popupImageImg.alt = name;
-  popupImageTxt.textContent = name;
-  openPopup(popupImage);
-};
-
-function createCard(item) {
-  const card = new Card(item, selectors, handleClickImage);
-  return card;
+function handleCardClick(name, link) {
+  popupScaleImage.open(name, link);
 }
 
-function renderElement(data, container) {
-  const card = createCard(data);
-  container.prepend(card.createElement());
+function handleNewCard(card) {
+  const newCard = new Card(card, selectors, handleCardClick).createElement();
+  return newCard;
 }
 
-function createInitialCards() {
-  places.forEach((item) => renderElement(item, list));
-}
-
-createInitialCards();
-
-const popups = document.querySelectorAll(selectors.popup);
-popups.forEach((popup) => {
-  popup.addEventListener("mousedown", (evt) => {
-    if (
-      (evt.target.classList.contains(selectors.popupOpened) ||
-        evt.target.classList.contains(selectors.popupButtonClose)) &&
-      evt.button === 0
-    ) {
-      closePopup(popup);
-    }
-  });
+const popupAddCard = new PopupWithForm(popupAdd, (data) => {
+  cards.addItem(handleNewCard(data));
 });
 
-const handleEscapeKey = function (evt) {
-  if (evt.key === "Escape") {
-    const popupOpened = document.querySelector(selectors.popupOpenedclass);
-    closePopup(popupOpened);
-  }
-};
-
-function openPopup(namePopup) {
-  namePopup.classList.add(selectors.popupOpened);
-  document.addEventListener("keydown", handleEscapeKey);
-}
-function closePopup(namePopup) {
-  namePopup.classList.remove(selectors.popupOpened);
-  document.removeEventListener("keydown", handleEscapeKey);
-}
-
-profileAdd.addEventListener("click", function () {
-  openPopup(popupAdd);
+const dataInfo = new UserInfo({
+  nameAuthor: profileTitle,
+  jobAuthor: profileSubtitle,
 });
 
-function editProfile(evt) {
-  evt.preventDefault();
-  profileTitle.textContent = popupEditInputName.value;
-  profileSubtitle.textContent = popupEditInputJob.value;
-  closePopup(popupEdit);
-}
-
-function addSubmitEventListeners() {
-  popupAddForm.addEventListener("submit", function (evt) {
-    const formInput = {
-      name: popupAddInputPlace.value,
-      link: popupAddInputPicture.value,
-    };
-    renderElement(formInput, list);
-    evt.target.reset();
-
-    closePopup(popupAdd);
-  });
-  popupEditForm.addEventListener("submit", editProfile);
-}
-addSubmitEventListeners();
-
-profileEdit.addEventListener("click", function () {
-  const nameForm = popupEdit.querySelector(selectors.popupEditForm).name;
-  formValidators[nameForm].resetValidation();
-  openPopup(popupEdit);
-  popupEditInputName.value = profileTitle.textContent;
-  popupEditInputJob.value = profileSubtitle.textContent;
+const popupEdit2 = new PopupWithForm(popupEdit, (data) => {
+  dataInfo.setUserInfo(data);
 });
-// 1
+popupEdit2.setEventListeners();
+
+profileEdit.addEventListener("click", () => {
+  popupEdit2.open();
+  const { nameAuthor, jobAuthor } = dataInfo.getUserInfo();
+  popupEditInputName.value = nameAuthor;
+  popupEditInputJob.value = jobAuthor;
+  validatorForEdit.resetValidation();
+});
+
+popupAddCard.setEventListeners();
+
+profileAdd.addEventListener("click", () => {
+  popupAddCard.open();
+  validatorForAddCard.resetValidation();
+});
+
+cards.renderItems();
+popupScaleImage.setEventListeners();
