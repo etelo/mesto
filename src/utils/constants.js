@@ -35,64 +35,64 @@ export const selectorsForms = {
 };
 
 export const selectors = {
-  profileTitle: ".profile__title",
-  profileSubtitle: ".profile__subtitle",
-  profileEdit: ".profile__edit-button",
-  profileAdd: ".profile__add-button",
+  profileTitleSelector: ".profile__title",
+  profileSubtitleSelector: ".profile__subtitle",
+  profileEditSelector: ".profile__edit-button",
+  profileAddSelector: ".profile__add-button",
 
-  list: ".elements__list",
-  template: ".template",
+  listSelector: ".elements__list",
+  templateSelector: ".template",
 
-  element: ".element",
-  elementTitle: ".element__title",
-  elementImage: ".element__image",
-  elementDelete: ".element__delete",
-  elementLike: ".element__like",
-  elementLikeActive: "element__like_active",
+  elementSelector: ".element",
+  elementTitleSelector: ".element__title",
+  elementImageSelector: ".element__image",
+  elementDeleteSelector: ".element__delete",
+  elementLikeSelector: ".element__like",
+  elementLikeActiveSelector: "element__like_active",
 
-  popup: ".popup",
-  popupOpened: "popup_opened",
-  popupOpenedclass: ".popup_opened",
+  popupSelector: ".popup",
+  popupOpenedSelector: "popup_opened",
+  popupOpenedclassSelector: ".popup_opened",
 
-  popupButtonClose: "popup__close-btn",
+  popupButtonCloseSelector: "popup__close-btn",
 
-  popupEdit: ".popup_type_edit-profile",
-  popupEditForm: ".popup__form",
-  popupEditProfileForm: ".popup__form_edit-profile",
-  popupEditButtonClose: ".popup__close-btn",
-  popupEditInputName: ".popup__input-name",
-  popupEditInputJob: ".popup__input-job",
+  popupEditSelector: ".popup_type_edit-profile",
+  popupEditFormSelector: ".popup__form",
+  popupEditProfileFormSelector: ".popup__form_edit-profile",
+  popupEditButtonCloseSelector: ".popup__close-btn",
+  popupEditInputNameSelector: ".popup__input-name",
+  popupEditInputJobSelector: ".popup__input-job",
 
-  popupAdd: ".popup_type_add-card",
-  popupAddForm: ".popup__form_add-card",
-  popupAddClosed: ".popup__close-btn",
-  popupAddSubmit: ".popup__button-submit",
-  popupAddInputPlace: ".popup__input-place",
-  popupAddInputPicture: ".popup__input-picture",
+  popupAddSelector: ".popup_type_add-card",
+  popupAddFormSelector: ".popup__form_add-card",
+  popupAddClosedSelector: ".popup__close-btn",
+  popupAddSubmitSelector: ".popup__button-submit",
+  popupAddInputPlaceSelector: ".popup__input-place",
+  popupAddInputPictureSelector: ".popup__input-picture",
 
-  popupImage: ".popup_type_image",
-  popupImageClosed: ".popup__image-closed",
-  popupImageImg: ".popup__image-img",
-  popupImageTxt: ".popup__image-txt",
+  popupImageSelector: ".popup_type_image",
+  popupImageClosedSelector: ".popup__image-closed",
+  popupImageImgSelector: ".popup__image-img",
+  popupImageTxtSelector: ".popup__image-txt",
 };
 
-export const profileTitle = document.querySelector(selectors.profileTitle);
-export const profileSubtitle = document.querySelector(selectors.profileSubtitle);
-export const profileEdit = document.querySelector(selectors.profileEdit);
-export const profileAdd = document.querySelector(selectors.profileAdd);
+export const profileTitle = document.querySelector(selectors.profileTitleSelector);
+export const profileSubtitle = document.querySelector(selectors.profileSubtitleSelector);
+export const profileEdit = document.querySelector(selectors.profileEditSelector);
+export const profileAdd = document.querySelector(selectors.profileAddSelector);
 
-export const list = document.querySelector(selectors.list);
+export const list = document.querySelector(selectors.listSelector);
 
-export const popupEdit = document.querySelector(selectors.popupEdit);
-export const popupEditForm = popupEdit.querySelector(selectors.popupEditForm);
-export const popupEditInputName = popupEdit.querySelector(selectors.popupEditInputName);
-export const popupEditInputJob = popupEdit.querySelector(selectors.popupEditInputJob);
+export const popupEditSelector = document.querySelector(selectors.popupEditSelector);
+export const popupEditForm = popupEditSelector.querySelector(selectors.popupEditFormSelector);
+export const popupEditInputName = popupEditSelector.querySelector(selectors.popupEditInputNameSelector);
+export const popupEditInputJob = popupEditSelector.querySelector(selectors.popupEditInputJobSelector);
 
-export const popupAdd = document.querySelector(selectors.popupAdd);
-export const popupAddForm = popupAdd.querySelector(selectors.popupAddForm);
-export const popupAddInputPlace = popupAdd.querySelector(selectors.popupAddInputPlace);
-export const popupAddInputPicture = popupAdd.querySelector(selectors.popupAddInputPicture);
+export const popupAdd = document.querySelector(selectors.popupAddSelector);
+export const popupAddForm = popupAdd.querySelector(selectors.popupAddFormSelector);
+export const popupAddInputPlace = popupAdd.querySelector(selectors.popupAddInputPlaceSelector);
+export const popupAddInputPicture = popupAdd.querySelector(selectors.popupAddInputPictureSelector);
 
-export const popupImage = document.querySelector(selectors.popupImage);
-export const popupImageImg = popupImage.querySelector(selectors.popupImageImg);
-export const popupImageTxt = popupImage.querySelector(selectors.popupImageTxt);
+export const popupImage = document.querySelector(selectors.popupImageSelector);
+export const popupImageImg = popupImage.querySelector(selectors.popupImageImgSelector);
+export const popupImageTxt = popupImage.querySelector(selectors.popupImageTxtSelector);

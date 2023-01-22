@@ -14,7 +14,7 @@ import {
   profileEdit,
   profileAdd,
   list,
-  popupEdit,
+  popupEditSelector,
   popupEditForm,
   popupEditInputName,
   popupEditInputJob,
@@ -28,12 +28,12 @@ const validatorForEdit = new FormValidator(selectorsForms, popupEditForm);
 validatorForAddCard.enableValidation();
 validatorForEdit.enableValidation();
 
-const cards = new Section(
+const cardsContainer = new Section(
   {
     items: initialCards,
     renderer: (item) => {
-      const cardItem = handleNewCard(item);
-      cards.addItem(cardItem);
+      const cardItem = createCard(item);
+      cardsContainer.addItem(cardItem);
     },
   },
   list
@@ -45,28 +45,28 @@ function handleCardClick(name, link) {
   popupScaleImage.open(name, link);
 }
 
-function handleNewCard(card) {
+function createCard(card) {
   const newCard = new Card(card, selectors, handleCardClick).createElement();
   return newCard;
 }
 
 const popupAddCard = new PopupWithForm(popupAdd, (data) => {
-  cards.addItem(handleNewCard(data));
+  cardsContainer.addItem(createCard(data));
 });
 
-const dataInfo = new UserInfo({
+const dataUserInfo = new UserInfo({
   nameAuthor: profileTitle,
   jobAuthor: profileSubtitle,
 });
 
-const popupEdit2 = new PopupWithForm(popupEdit, (data) => {
-  dataInfo.setUserInfo(data);
+const popupEdit = new PopupWithForm(popupEditSelector, (data) => {
+  dataUserInfo.setUserInfo(data);
 });
-popupEdit2.setEventListeners();
+popupEdit.setEventListeners();
 
 profileEdit.addEventListener("click", () => {
-  popupEdit2.open();
-  const { nameAuthor, jobAuthor } = dataInfo.getUserInfo();
+  popupEdit.open();
+  const { nameAuthor, jobAuthor } = dataUserInfo.getUserInfo();
   popupEditInputName.value = nameAuthor;
   popupEditInputJob.value = jobAuthor;
   validatorForEdit.resetValidation();
@@ -79,5 +79,5 @@ profileAdd.addEventListener("click", () => {
   validatorForAddCard.resetValidation();
 });
 
-cards.renderItems();
+cardsContainer.renderItems();
 popupScaleImage.setEventListeners();
