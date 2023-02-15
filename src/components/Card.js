@@ -1,11 +1,28 @@
 export default class Card {
-  constructor(data, selectors, handleClickImage) {
+  constructor({
+    handleClickImage,
+    handleDeleteClick,
+    handlePutLike,
+    handleDeleteLike,
+    data,
+    id,
+    selectors,
+  }) {
     this._title = data.name;
     this._imageLink = data.link;
+    this._id = data._id;
+    this._selfId = id;
+    this._likes = data.likes;
+    this._owner = data.owner;
     this._selectors = selectors;
     this._template = document.querySelector(selectors.templateSelector);
-    this._card = this._template.content.querySelector(this._selectors.elementSelector).cloneNode(true);
+    this._card = this._template.content
+      .querySelector(this._selectors.elementSelector)
+      .cloneNode(true);
     this._handleClickImage = handleClickImage;
+    this._handleDeleteClick = handleDeleteClick;
+    this._handlePutLike = handlePutLike;
+    this._handleDeleteLike = handleDeleteLike;
   }
 
   createElement() {
@@ -18,9 +35,30 @@ export default class Card {
 
     this._elementTitle.textContent = this._title;
     this._elementImage.alt = this._title;
-    this._elementImage.src = this._imageLink;;
+    this._elementImage.src = this._imageLink;
+
+    const likesLength = this._likes.length;
+    this.likeCount(likesLength);
+
+    if (this._likes.some((like) => like._id === this._selfId)) {
+      this.like();
+    }
+
+    if (this._owner._id === this._selfId) {
+      this._elementDelete.classList.add("element__delete-active");
+    }
 
     return this._card;
+  }
+
+  getId = () => {
+    return this._id;
+  };
+
+  likeCount(likesCount) {
+    const likeCount = this._card.querySelector(this._selectors.elementLikeCount);
+
+    likeCount.textContent = likesCount;
   }
 
   _setEventListeners() {
@@ -28,19 +66,24 @@ export default class Card {
     this._elementImage.addEventListener("click", () =>
       this._handleClickImage(this._title, this._imageLink)
     );
-    // this._elementImage.addEventListener('click', this._handleClickImage);
     // удаление карточки
-    this._elementDelete.addEventListener("click", () => this._handleClickDeleteCard());
+    this._elementDelete.addEventListener("click", () => this._handleDeleteClick());
     // поставить лайк
-    this._elementLike.addEventListener("click", () => this._handleClickLike());
+    this._elementLike.addEventListener("click", () => {
+      if (this._elementLike.classList.contains(this._selectors.elementLikeActiveSelector)) {
+        this._handleDeleteLike(this._card);
+      } else {
+        this._handlePutLike(this._card);
+      }
+    });
   }
 
-  _handleClickDeleteCard() {
+  handleClickDeleteCard = () => {
     this._card.remove();
     this._card = null;
-  }
+  };
 
-  _handleClickLike() {
+  like() {
     this._elementLike.classList.toggle(this._selectors.elementLikeActiveSelector);
   }
 }
