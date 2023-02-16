@@ -31,12 +31,19 @@ import {
 
 const api = new Api(options);
 const popupScaleImage = new PopupWithImage(popupImage);
-const validatorForAddCard = new FormValidator(selectorsForms, popupAddForm);
-const validatorForEdit = new FormValidator(selectorsForms, popupEditForm);
-const validatorForEditAvatar = new FormValidator(selectorsForms, popupAvatar);
-validatorForEditAvatar.enableValidation();
-validatorForAddCard.enableValidation();
-validatorForEdit.enableValidation();
+popupScaleImage.setEventListeners();
+
+const formValidators = {};
+const enableValidation = (config) => {
+  const formList = Array.from(document.querySelectorAll(config.formSelector));
+  formList.forEach((formElement) => {
+    const validator = new FormValidator(config, formElement);
+    const formName = formElement.getAttribute("name");
+    formValidators[formName] = validator;
+    validator.enableValidation();
+  });
+};
+enableValidation(selectorsForms);
 
 const popupDeleteCard = new PopupWithSubmit(popupDelete);
 popupDeleteCard.setEventListeners();
@@ -135,7 +142,7 @@ profileChangeAvatar.setEventListeners();
 
 profileChangeAvatarButton.addEventListener("click", () => {
   profileChangeAvatar.open();
-  validatorForEditAvatar.resetValidation();
+  formValidators["avatar-form"].resetValidation();
 });
 
 const popupEdit = new PopupWithForm(popupEditSelector, {
@@ -173,13 +180,13 @@ const popupAddCard = new PopupWithForm(popupAdd, {
 popupAddCard.setEventListeners();
 profileAdd.addEventListener("click", () => {
   popupAddCard.open();
-  validatorForAddCard.resetValidation();
+  formValidators["card-form"].resetValidation();
 });
 
 profileEdit.addEventListener("click", () => {
   const userInfo = profileInfo.getUserInfo();
   popupEditInputName.value = userInfo.name;
   popupEditInputJob.value = userInfo.about;
-  validatorForEdit.resetValidation();
+  formValidators["profile-form"].resetValidation();
   popupEdit.open();
 });

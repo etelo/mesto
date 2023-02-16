@@ -11,61 +11,65 @@ export default class Api {
 
   getUserInfo() {
     const url = `${this._baseUrl}/users/me`;
-    return fetch(url, { headers: this._headers }).then(this._handleResponse);
+    return this._request(url, { headers: this._headers });
   }
 
   editProfile(data) {
     const url = `${this._baseUrl}/users/me`;
-    return fetch(url, {
+    return this._request(url, {
       method: "PATCH",
       headers: this._headers,
       body: JSON.stringify({
         name: data.name,
         about: data.about,
       }),
-    }).then(this._handleResponse);
+    });
   }
 
   addCard(data) {
     const url = `${this._baseUrl}/cards`;
-    return fetch(url, {
+    return this._request(url, {
       method: "POST",
       headers: this._headers,
       body: JSON.stringify({
         name: data.name,
         link: data.link,
       }),
-    }).then(this._handleResponse);
+    });
   }
 
   editAvatar(data) {
     const url = `${this._baseUrl}/users/me/avatar`;
-    return fetch(url, {
+    return this._request(url, {
       method: "PATCH",
       headers: this._headers,
       body: JSON.stringify({
         avatar: data.avatar,
       }),
-    }).then(this._handleResponse);
+    });
   }
 
   getInitialCards() {
     const url = `${this._baseUrl}/cards`;
-    return fetch(url, { headers: this._headers }).then(this._handleResponse);
+    return this._request(url, { headers: this._headers });
   }
 
   deleteCard(id) {
     const url = `${this._baseUrl}/cards/${id}`;
-    return fetch(url, { method: "DELETE", headers: this._headers }).then(this._handleResponse);
+    return this._request(url, { method: "DELETE", headers: this._headers });
   }
 
   putLike(id) {
     const url = `${this._baseUrl}/cards/${id}/likes`;
-    return fetch(url, { method: "PUT", headers: this._headers }).then(this._handleResponse);
+    return this._request(url, { method: "PUT", headers: this._headers });
   }
 
   deleteLike(id) {
     const url = `${this._baseUrl}/cards/${id}/likes`;
-    return fetch(url, { method: "DELETE", headers: this._headers }).then(this._handleResponse);
+    return this._request(url, { method: "DELETE", headers: this._headers });
+  }
+
+  _request(url, options) {
+    return fetch(url, options).then(this._handleResponse);
   }
 }

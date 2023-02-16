@@ -31,6 +31,8 @@ export default class Card {
     this._elementDelete = this._card.querySelector(this._selectors.elementDeleteSelector);
     this._elementLike = this._card.querySelector(this._selectors.elementLikeSelector);
 
+    this._elementlikeCount = this._card.querySelector(this._selectors.elementLikeCount);
+
     this._setEventListeners();
 
     this._elementTitle.textContent = this._title;
@@ -56,9 +58,7 @@ export default class Card {
   };
 
   likeCount(likesCount) {
-    const likeCount = this._card.querySelector(this._selectors.elementLikeCount);
-
-    likeCount.textContent = likesCount;
+    this._elementlikeCount.textContent = likesCount;
   }
 
   _setEventListeners() {
